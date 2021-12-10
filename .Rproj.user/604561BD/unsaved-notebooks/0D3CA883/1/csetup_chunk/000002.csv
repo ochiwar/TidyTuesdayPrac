@@ -1,0 +1,24 @@
+"0","knitr::opts_chunk$set(echo = TRUE)"
+"0",""
+"0","library(tidyverse)"
+"0","library(stringr)"
+"0","library(rebus)"
+"2","
+Attaching package: ‘rebus’
+
+"
+"2","The following object is masked from ‘package:scales’:
+
+    alpha
+
+"
+"2","The following object is masked from ‘package:stringr’:
+
+    regex
+
+"
+"2","The following object is masked from ‘package:ggplot2’:
+
+    alpha
+
+"

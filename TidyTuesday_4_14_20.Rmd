@@ -1,0 +1,177 @@
+---
+title: "BBC Rap Music Rankings"
+author: "Ochiwar"
+date: "4/16/2020"
+output: 
+    html_document:
+        theme: cosmo
+        highlight: monochrome
+        toc: true
+        toc_float: false
+        toc_depth: 4
+        code_folding: hide
+---
+<style>
+body, h1, h2, h3, h4 {
+    font-family:"Calibri", serif;
+}
+
+body {
+    color: #333333;
+}
+a, a:hover {
+    color: red;
+}
+pre {
+    font-size: 10px;
+}
+</style>
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(echo = TRUE, cache = TRUE, 
+                      warning = FALSE, message = FALSE, 
+                      dpi = 100, fig.width = 8, fig.height = 5)
+```
+
+
+## Load Libraries
+
+```{r}
+library(tidyverse)
+library(lubridate)
+```
+
+
+## Load Data
+
+```{r}
+tuesdata <- tidytuesdayR::tt_load("2020-04-14")
+
+polls <- tuesdata$polls
+rankings <- tuesdata$rankings
+
+head(polls)
+head(rankings)
+```
+
+## Data Wrangling
+
+Most critics in the dataset are male. Only 7% of critics identify as female and 88% identify as male. Does rap music have a gender appeal or do we just have more males in the 'music critic' business? 
+
+```{r, warning=FALSE, echo=FALSE}
+gender_tbl <- polls %>% 
+    count(gender, name = "count") %>%
+    mutate(prop = scales::percent(count/sum(count))) %>% 
+    arrange(desc(prop))
+
+knitr::kable(gender_tbl)
+
+```
+
+## Data Analysis
+
+#1
+How many of these critics have their primary country listed as US? 
+
+```{r}
+polls %>% 
+    count(critic_country) %>% 
+    arrange(desc(n)) %>% 
+    knitr::kable()
+```
+
+
+
+Which decade had the most mentions
+
+```{r echo=FALSE}
+library(extrafont)
+
+decade_spread <- polls %>% 
+    select(year) %>% 
+    mutate(decade = year - year%%10 ) %>% 
+    group_by(decade) %>% 
+    count()  
+    
+decade_spread %>% 
+    ggplot(aes(decade, n)) +
+    geom_bar(stat = "identity", fill = "salmon") +
+    geom_text(aes(label = n), hjust = 1.2, family = "Arial Narrow", size = 5)+
+    coord_flip() + 
+    labs(
+        y = "",
+        x = "",
+        title = "Most Critics Selected and Ranked Songs from the 1990s"
+    )+
+    theme_minimal() +
+    theme(
+        text = element_text(family = "Calibri"),
+        axis.text.x = element_blank(),
+        axis.text.y = element_text(size = 13, family = "Arial Narrow"),
+        plot.title = element_text(size = 16), 
+        plot.background = element_rect(color = "gray")
+    )
+   
+```
+
+How did the critics rank songs across the years choosen
+
+```{r}
+rankings %>% 
+    ggplot(aes(year, points)) +
+    geom_point(size = 2) + 
+    geom_smooth(se = F) +
+    scale_y_continuous(trans = "sqrt")
+```
+
+
+
+
+Critics Top Ranked Song Titles with their Artists
+
+```{r}
+library(glue)
+top_six_tbl <- polls %>% 
+    count(artist, title) %>% 
+    arrange(desc(n)) %>% 
+    filter(n >= 10) %>% 
+    inner_join(rankings, by = c("artist", "title"), suffix = c("_poll", "_ranking")) %>% 
+
+    select(artist, title, n_poll, points) %>% 
+    mutate(artist = factor(artist) %>% fct_reorder(points, max))
+
+#levels(top_six_tbl$artist)
+
+top_six_tbl %>% 
+    ggplot(aes(artist,points)) +
+    geom_col() + 
+    geom_text(aes(label = glue("title:{title}\npoints:{points}")), hjust = 1.1, fontface = "bold") +
+    coord_flip() + 
+    
+    labs(
+        y = "",
+        x = "",
+        title = "Critics Top Ranked Titles with their Artists"
+    )+
+    theme_minimal(16) +
+    theme(
+        text = element_text(family = "Calibri"),
+        axis.text.x = element_blank(),
+        axis.text.y = element_text(size = 13, family = "Arial Narrow"),
+        plot.title = element_text(size = 16, hjust = 0.1), 
+        plot.background = element_rect(color = "gray")
+    )
+    
+```
+
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

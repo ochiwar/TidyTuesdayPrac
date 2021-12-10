@@ -1,0 +1,150 @@
+---
+title: "TidyTuesday_11.29.19"
+author: "Ochiwar"
+date: "1/6/2020"
+output: html_document
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+library(tidyquant)
+library(tidyr)
+library(tidytext)
+
+theme_set(theme_tq())
+
+tuesdata <- tidytuesdayR::tt_load("2019-11-12")
+
+cran_code <- tuesdata$loc_cran_packages
+
+
+```
+
+What are the most common programming languages in CRAN Packages
+
+```{r}
+cran_code %>% 
+    count(language, sort = TRUE) %>% 
+    head(20) %>% 
+    mutate(language = fct_reorder(language, n)) %>% 
+    ggplot(aes(language, n)) +
+    geom_col() + 
+    coord_flip() + 
+    labs(
+        x = "", 
+        y = "# of packages that have code from this language"
+    )
+```
+
+
+```{r}
+by_language <- cran_code %>% 
+    group_by(language) %>% 
+    summarise(
+        packages           = n(), 
+        comments           = sum(comment),
+        files              = sum(file),
+        code               = sum(code), 
+        lines_per_package  = code/packages,
+        files_per_package  = files/packages, 
+        comment_code_ratio = comments/code
+    ) %>% 
+    arrange(desc(packages))
+```
+
+```{r}
+by_language %>% 
+    head(20) %>% 
+    mutate(language = fct_reorder(language, packages)) %>% 
+    ggplot(aes(language, packages )) +
+    geom_col() + 
+    coord_flip() + 
+    labs(
+        x = "", 
+        y = "# of packages that have code from this language"
+    )
+
+```
+
+```{r}
+by_language %>% 
+    gather(metric, value, packages, code, files) %>% 
+    group_by(metric) %>% 
+    top_n(8, value) %>% 
+    ungroup() %>% 
+    mutate(language = reorder_within(language, value, metric), 
+           metric = str_to_title(metric)) %>% 
+    ggplot(aes(language, value)) +
+    geom_col() +
+    coord_flip() +
+    scale_x_reordered() +
+    scale_y_continuous(labels = scales::comma) +
+    facet_wrap(~metric, scales = "free", ncol = 1) + 
+    labs (
+        x = "Value (# of lines of code, files or packages)"
+    )
+```
+
+
+```{r}
+by_language %>% 
+    filter(packages > 20) %>% 
+    ggplot(aes(packages, comment_code_ratio)) + 
+    geom_point() +
+    geom_text(aes(label = language), check_overlap = TRUE, vjust = 1, hjust = 1, size = 4) +
+    scale_x_log10() + 
+    expand_limits(x = 10) + 
+    labs(
+        x = "# of packages languages is used in", 
+        y = "Comment/Code ratio"
+    )
+```
+
+```{r}
+by_language %>% 
+    filter(packages > 20) %>% 
+    ggplot(aes(packages, lines_per_package)) + 
+    geom_point() +
+    geom_text(aes(label = language), check_overlap = TRUE, vjust = 1, hjust = 1, size = 4) +
+    scale_x_log10() + 
+    expand_limits(x = 10) + 
+    labs(
+        x = "# of packages languages is used in", 
+        y = "lines_per_package"
+    )
+```
+
+How much R code is there in each package?
+
+```{r}
+cran_code %>% 
+    filter(language == "R") %>% 
+    ggplot(aes(code)) +
+    geom_histogram(color = "white") + 
+    scale_x_log10(labels = scales::comma)
+
+```
+
+```{r}
+cran_code %>% 
+    filter(language == "R") %>% 
+    arrange(desc(code)) %>%  
+```
+
+```{r}
+packages <- tidyverse_packages() %>% 
+    str_extract("[a-z\\d]+")
+```
+
+```{r}
+cran_code %>% 
+    filter(pkg_name %in% packages, 
+           language == "R") %>% 
+    arrange(desc(code))
+```
+

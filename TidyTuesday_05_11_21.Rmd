@@ -1,0 +1,94 @@
+---
+title: "TidyTuesday_9.1.20"
+author: "Ochiwar"
+date: "8/4/2020"
+output:
+  pdf_document: 
+    latex_engine: xelatex
+header-includes:
+  - \usepackage{pdflscape}
+  - \newcommand{\blandscape}{\begin{landscape}}
+  - \newcommand{\elandscape}{\end{landscape}}
+  - \usepackage{fancyhdr}
+papersize: a4
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, 
+                      message = FALSE,
+                      include = FALSE)
+```
+
+
+```{r load_libraries}
+
+library(tidytuesdayR)
+library(ggplot2)
+library(tidyverse)
+library(sf)
+library(rnaturalearth)
+library(patchwork)
+library(scales)
+library(ggthemes)
+library(ggtext)
+library(extrafont)
+library(hrbrthemes)
+library(lubridate)
+library(forcats)
+library(janitor)
+
+library(silgelib)
+
+extrafont::loadfonts(quiet = TRUE)
+
+theme_set(theme_plex())
+
+
+```
+
+## Download Data
+
+```{r include=TRUE}
+
+tt <- tt_load("2021-05-11")
+
+broadband_county <- broadband <- tt$broadband %>% 
+    clean_names() %>% 
+    rename(state = st) %>% 
+    mutate(state = state.name[match(state,state.abb)]) %>% 
+    mutate(state = ifelse(is.na(state), "District of Columbia", state))
+
+broadband_zip <- tt$broadband_zip %>% 
+    clean_names() %>% 
+    rename(state = st)
+    
+```
+
+## Data Wrangling 
+
+```{r}
+library(readxl)
+library(rebus)
+
+county_population <- read_excel('C:/Users/ochiw/Downloads/co-est2019-annres.xlsx', skip = 3) %>% 
+    select(county = ...1, population_2017 = `2017`) %>% 
+    separate(county, c("county_name", "state"), sep = ", ") %>% 
+    #Using Rebus Code to remove dot
+    mutate(county_name = str_remove(county_name, START %R% DOT ))
+
+
+
+broadband_county %>% 
+    left_join(county_population, by = c("county_name", "state")) %>% 
+    filter(is.na(population_2017))
+    
+
+broadband_county %>% 
+    inner_join(county_population, by = c("county_name", "state")) %>% 
+    filter(is.na(population_2017))
+
+
+```
+
+

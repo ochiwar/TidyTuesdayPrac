@@ -1,0 +1,56 @@
+---
+title: "Tidy Tuesday"
+author: "Ochiwar"
+date: "5/28/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE, warning=FALSE, echo=FALSE}
+knitr::opts_chunk$set(echo = TRUE,include = FALSE, warning = FALSE)
+```
+
+## Load Libraries
+```{r}
+library(tidyverse)
+library(janitor)
+library(lubridate)
+library(ggthemes)
+
+theme_set(theme_light())
+```
+
+
+
+## Load Data 
+
+```{r}
+tuesdata <- tidytuesdayR::tt_load('2020-05-26')
+
+cocktails <- tuesdata$cocktails
+
+boston_cocktails <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-26/boston_cocktails.csv')
+
+head(boston_cocktails, n = 20)
+```
+
+## Data Wrangling
+
+```{r}
+
+cocktails %>% 
+    select(-c(date_modified, drink_thumb, video, iba)) %>% head(20)
+
+```
+
+```{r}
+boston_cocktails %>% 
+    distinct(row_id)
+
+boston_cocktails %>% 
+    group_by(row_id) %>% 
+    summarise(ingredients = max(ingredient_number)) %>% 
+    
+    ggplot(aes(ingredients)) +
+    geom_bar()
+```
+

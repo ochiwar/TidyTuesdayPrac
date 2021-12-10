@@ -1,0 +1,194 @@
+---
+title: "TidyTuesday_02_20_2020"
+author: "Ochiwar"
+date: "2/22/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Loading Libraries 
+
+```{r include=FALSE}
+library(tidyverse)
+library(ggforce)
+library(ggpmthemes)
+library(stringr)
+library(extrafont)
+
+
+```
+
+## Load In Tidy Data
+
+
+```{r echo=FALSE}
+tuesdata <- tidytuesdayR::tt_load("2020-02-18")
+food_consumption <- tuesdata$food_consumption
+
+```
+
+## Wrangling Data
+
+You can also embed plots, for example:
+
+```{r echo=FALSE, warning=FALSE}
+
+
+food_consumption %>% 
+    count(country)
+
+food_consumption %>% 
+    count(food_category)
+
+info <- food_consumption %>% 
+    group_by(food_category) %>% 
+    filter(co2_emmission == min(co2_emmission))
+
+
+food_consumption %>%
+  mutate(food_category = str_wrap(food_category, 20)) %>% 
+  mutate(food_category = fct_reorder(food_category, -co2_emmission, mean)) %>% 
+    ggplot(aes(x = food_category, co2_emmission)) + 
+    geom_sina(aes(color = co2_emmission), method = "c", show.legend = F, size = 1, scale = "width") + 
+    scale_y_continuous(trans =  "log1p", limits = c(0, 1800), breaks = c(0, 1800)) +
+    #scale_y_log10() +
+    coord_flip() + 
+    
+    scale_color_viridis_c(
+    option = "plasma",
+    trans = "log10",
+    begin = 0.05
+  ) + 
+    
+      labs(
+          x = "",
+    y = bquote("CO"[2]~emission~(Kg~CO[2]~person^{-1}~year^{-1})),
+    title = str_wrap("CO2 emission for various food categories around the World", 35),
+    subtitle = str_wrap("Each point corresponds to one of the 130 countries included in the data", 40),
+    caption = "Tidytuesday 2020 week #8\nData: https://www.nu3.de/blogs/nutrition/food-carbon-footprint-index-2018\n@philmassicotte"
+  ) + 
+    
+    theme(
+    legend.position = "none",
+    plot.background = element_rect(fill = "#3c3c3c"),
+    panel.background = element_rect(fill = "#3c3c3c"),
+    text = element_text(color = "white"),
+    axis.text = element_text(color = "white"),
+    panel.grid = element_blank(),
+    axis.ticks = element_blank(),
+    axis.title.y = element_blank(),
+    panel.border = element_blank(),
+    panel.grid.major.y = element_line(size = 0.25, color = "gray30"),
+    #plot.title.position = "plot",
+    plot.title = element_text(hjust = 0.5, size = 18),
+    plot.subtitle = element_text(hjust = 0.5),
+    plot.caption = element_text(color = "gray75", size = 6)
+  )
+    ```
+
+Using another template from TidyTuesday Series
+
+```{r hotels, echo=FALSE}
+tuesdata2 <- tidytuesdayR::tt_load("2020-02-11")
+hotels <- tuesdata2$hotels
+
+```
+
+```{r}
+d2 <- hotels %>% 
+    rename(yr = arrival_date_year, mo = arrival_date_month) %>% 
+    mutate(mo = str_sub(mo, end = 3), mo = factor(mo, levels = month.abb)) %>% 
+    group_by(hotel, yr, mo) %>% 
+    summarise(M_ADR = mean(adr)) %>% 
+    #spread(key = yr,value = M_ADR)
+    pivot_wider(names_from = yr, values_from = M_ADR)
+
+```
+
+Plotting monthly Hotel Trends per year
+
+```{r}
+ggplot(d2, aes(mo)) +
+    facet_wrap(~hotel, strip.position = "bottom") +
+    geom_bar(aes(y = `2017`, fill = '2017'), stat = 'identity', width = .2) +
+    geom_bar(aes(y = `2016`, fill = '2016'), stat = 'identity', width = .4) +
+    geom_bar(aes(y = `2015`, fill = '2015'), stat = 'identity', width = .6) +
+    scale_fill_manual('', values = c('grey50', 'grey65', 'grey80')) +
+    #scale_y_continuous(expand = expansion(c(0, .05))) +
+    expand_limits(y = 0) +
+    labs(x = '', y = 'Average Daily Rate',
+     title = 'Hotel Bookings', 
+     subtitle = '**Average daily rate for two hotels in Portugal from July 2015 to August 2017.**<br/>The average daily rate increased for both hotels from year to year, but the <br/>resort hotel in the Algarve has more pronounced seasonal fluctuations than<br/>the city hotel in Lisbon.', 
+     caption = 'Data by Antonio, de Almeida, & Nunes (2019) *Data in Brief* **22**:41-49<br/> #TidyTuesday • @watzoever') +
+    cowplot::theme_minimal_hgrid() +
+    theme(text = element_text(family = 'Source Sans Pro'),
+          axis.line.x = element_line(color = 'grey80'), axis.ticks = element_blank(),
+          axis.title.y = element_text(size = 12, face = 'bold', margin = margin(r = 10)),
+          legend.position = 'bottom',
+          strip.placement = 'outside', strip.text = element_text(size = 12, face = 'bold'),
+          plot.title = element_text(size = 24),
+          plot.subtitle = element_markdown(lineheight = 1.15), 
+          #plot.caption = element_markdown(lineheight = 1.15, margin = margin(t = -12)),
+          plot.margin = unit(c(2, 2, 2, 2), 'cm'))
+
+```
+
+```{r}
+library(viridis)
+library(extrafont)
+
+tidytuesdayR::tt_load("2020-02-25")
+dataset <- tidytuesdayR::tt_load("2020-02-25")$measles
+
+dataset_type <- dataset %>% filter(!is.na(type))
+
+filtered <- dataset_type %>% 
+    group_by(type) %>% 
+    summarise(mean_mmr = mean(mmr)) %>% 
+    mutate(type = fct_reorder(type,mean_mmr)) %>% 
+    ungroup()
+
+filtered %>% 
+    ggplot(aes(type, mean_mmr, fill = type)) +
+    geom_col() + 
+    scale_fill_viridis(discrete = TRUE) +
+    theme_light() + 
+    labs(
+        x = "",
+        y = "",
+        title = "Mean Measles, Mumps and Rubella Vaccination Rate",
+        subtitle = "by type of school"
+    ) + 
+    theme(
+        plot.background = element_rect(fill = "#000000", colour = "#000000"),
+        panel.background = element_rect(fill = "#000000"),
+        title = element_text(color = "#abc1d3", face = "bold", size = 16),
+        axis.title.y = element_text(colour = "#ffffff", face = "bold", size = 20, family = "mono"),
+        axis.title.x = element_text(colour = "#ffffff", face = "bold", size = 20, family = "mono"),
+        axis.text.x = element_text(colour = "#ffffff", size = 12, family = "mono"),
+        axis.text.y = element_text(colour = "#ffffff", size = 12, family = "mono"),
+        text = element_text(family = "Arial"),
+        panel.grid.major = element_line(
+            size = 0.3,
+            linetype = "dashed",
+            color = "#3f4d58"
+        ),
+        panel.grid.minor = element_line(
+            size = 0.3,
+            linetype = "dashed",
+            color = "#3f4d58"
+        ), 
+        panel.border = element_rect(
+            colour = "#000000",
+            fill = NA
+        ),
+        legend.position = "none", 
+        plot.margin = unit(c(1,1,1,1), "cm")
+    )
+
+ggsave("measles.png", dpi = 300, width = 12, height = 9)
+```
+

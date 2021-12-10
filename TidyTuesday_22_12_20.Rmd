@@ -1,0 +1,101 @@
+---
+title: "TidyTuesday_11.13.20"
+author: "Ochiwar"
+date: "11/13/2020"
+output:
+  pdf_document: 
+    latex_engine: xelatex
+header-includes:
+  - \usepackage{pdflscape}
+  - \newcommand{\blandscape}{\begin{landscape}}
+  - \newcommand{\elandscape}{\end{landscape}}
+  - \usepackage{fancyhdr}
+papersize: a4
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, 
+                      message = FALSE,
+                      include = FALSE, 
+                      warning = FALSE)
+```
+
+
+```{r load_libraries}
+
+library(tidytuesdayR)
+library(ggplot2)
+library(tidyverse)
+library(waffle)
+library(sf)
+library(rnaturalearth)
+library(patchwork)
+library(scales)
+library(ggthemes)
+library(viridis)
+library(ggtext)
+library(extrafont)
+library(hrbrthemes)
+library(lubridate)
+library(forcats)
+library(showtext)
+library(glue)
+library(scales)
+library(countrycode)
+
+library(silgelib)
+
+extrafont::loadfonts(quiet = TRUE)
+
+theme_set(theme_plex())
+
+font_add_google("IBM Plex Sans", "IBMPlexSans")
+
+showtext_auto()
+
+```
+
+
+# Activity Description
+
+
+## Load Data 
+
+```{r include=TRUE}
+
+tuesdata <- tidytuesdayR::tt_load(2020, week = 52)
+
+big_mac <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-12-22/big-mac.csv') %>% rename(country = name)
+
+
+glimpse(big_mac)
+
+```
+
+```{r include = TRUE}
+big_mac %>% 
+  add_count(country, name = "country_total") %>% 
+  filter(country_total == max(country_total)) %>% 
+  mutate(country = fct_reorder(country, local_price, function(.) max(.)/min(.))) %>% 
+  ggplot(aes(date, local_price, color = country)) + 
+  geom_line() +
+  expand_limits(y = 0) +
+  facet_wrap( ~ country, scales = "free_y") + 
+  theme(
+    text = element_text(family = "Arial"),
+    legend.position = "none"
+  )
+  
+  
+  
+```
+
+
+```{r}
+
+```
+
+
+

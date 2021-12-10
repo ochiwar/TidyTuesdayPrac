@@ -1,0 +1,151 @@
+---
+title: "TidyTuesday_11.13.20"
+author: "Ochiwar"
+date: "11/13/2020"
+output:
+  pdf_document: 
+    latex_engine: xelatex
+header-includes:
+  - \usepackage{pdflscape}
+  - \newcommand{\blandscape}{\begin{landscape}}
+  - \newcommand{\elandscape}{\end{landscape}}
+  - \usepackage{fancyhdr}
+papersize: a4
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, 
+                      message = FALSE,
+                      include = FALSE)
+```
+
+
+```{r load_libraries}
+
+library(tidytuesdayR)
+library(ggplot2)
+library(tidyverse)
+library(waffle)
+library(sf)
+library(rnaturalearth)
+library(patchwork)
+library(scales)
+library(ggthemes)
+library(viridis)
+library(ggtext)
+library(extrafont)
+library(hrbrthemes)
+library(lubridate)
+library(forcats)
+
+extrafont::loadfonts(quiet = TRUE)
+```
+
+# Activity Description
+
+
+## Load Data 
+
+```{r include=TRUE}
+
+tuesdata <- tidytuesdayR::tt_load('2020-11-10')
+
+mobile <- tuesdata$mobile
+
+landline <- tuesdata$landline
+
+```
+
+## Mobile Phone Data
+
+
+
+```{r data_wrangling, include=TRUE, echo=FALSE}
+
+summary(mobile)
+
+africa_mobile <- mobile %>% filter(continent == "Africa")
+
+africa_land <- landline %>% filter(continent == "Africa")
+
+
+
+```
+
+
+# Africa's Mobile Subscriptions for 2017
+
+```{r}
+
+africa_mobile %>% 
+    filter(year == 2017, 
+           !is.na(mobile_subs)) %>% 
+    mutate(entity = factor(entity)) %>% 
+    #arrange(desc(mobile_subs)) %>% 
+    
+    ggplot(aes(mobile_subs, fct_reorder(entity, mobile_subs))) + 
+    geom_col() +
+    geom_col(data = subset(africa_mobile, entity == "Nigeria" & year == 2017),fill = "green")
+
+```
+
+# Rate Change of Mobile Subscriptions in Nigeria
+
+```{r}
+
+nigeria_mobile_growth <- africa_mobile %>% 
+    filter(entity == "Nigeria") %>% 
+    mutate(rate_of_change = (mobile_subs - lag(mobile_subs)) / lag(mobile_subs) * 100) %>% 
+    mutate(rate_of_change = case_when(is.nan(rate_of_change) ~ 0, 
+                                      is.na(rate_of_change) ~ 0, 
+                                      is.infinite(rate_of_change) ~ 0, 
+                                        TRUE ~ rate_of_change))
+    
+ggplot(nigeria_mobile_growth, aes(year, rate_of_change)) + 
+    geom_line()
+
+```
+
+# Africa's Land Subscriptions for 2017
+
+```{r}
+
+africa_land %>% 
+    filter(year == 2017, 
+           !is.na(landline_subs)) %>% 
+    mutate(entity = factor(entity)) %>% 
+    #arrange(desc(mobile_subs)) %>% 
+    
+    ggplot(aes(landline_subs, fct_reorder(entity, landline_subs))) + 
+    geom_col() +
+    geom_col(data = subset(africa_land, entity == "Nigeria" & year == 2017),fill = "green")
+
+```
+
+# Nigera landline and Mobile Subscriptions Trend over time
+
+```{r}
+nigeria_moblie_land_subs <- africa_land %>% 
+    filter(entity == "Nigeria") %>% 
+    left_join(africa_mobile %>% filter(entity == "Nigeria"), by = c("entity", "year")) %>% 
+    select(entity, year, landline_subs, mobile_subs) 
+
+nigeria_moblie_land_subs %>% 
+    pivot_longer(!c(year, entity), names_to = "subscription", values_to = "ratio") %>% 
+
+    ggplot(aes(year, ratio, color = subscription)) + 
+    geom_line() + 
+    geom_point(shape = 21, size = 4) + 
+    
+    labs(
+        x = "",
+        y = "subscriptions (per 100 people)", 
+        title = "Nigeria Landline and Mobile Subscription Trends"
+    )+
+    
+    theme_ipsum()
+```
+
+
+

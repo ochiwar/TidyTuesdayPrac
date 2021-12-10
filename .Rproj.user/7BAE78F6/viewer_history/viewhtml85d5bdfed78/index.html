@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<style>body{background-color:white;}</style>
+
+
+</head>
+<body>
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#jxetkbsrvf .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#jxetkbsrvf .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#jxetkbsrvf .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#jxetkbsrvf .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 4px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#jxetkbsrvf .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jxetkbsrvf .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#jxetkbsrvf .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#jxetkbsrvf .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#jxetkbsrvf .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#jxetkbsrvf .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#jxetkbsrvf .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#jxetkbsrvf .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#jxetkbsrvf .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#jxetkbsrvf .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#jxetkbsrvf .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#jxetkbsrvf .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#jxetkbsrvf .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#jxetkbsrvf .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jxetkbsrvf .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#jxetkbsrvf .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jxetkbsrvf .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#jxetkbsrvf .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#jxetkbsrvf .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jxetkbsrvf .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#jxetkbsrvf .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#jxetkbsrvf .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#jxetkbsrvf .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#jxetkbsrvf .gt_left {
+  text-align: left;
+}
+
+#jxetkbsrvf .gt_center {
+  text-align: center;
+}
+
+#jxetkbsrvf .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#jxetkbsrvf .gt_font_normal {
+  font-weight: normal;
+}
+
+#jxetkbsrvf .gt_font_bold {
+  font-weight: bold;
+}
+
+#jxetkbsrvf .gt_font_italic {
+  font-style: italic;
+}
+
+#jxetkbsrvf .gt_super {
+  font-size: 65%;
+}
+
+#jxetkbsrvf .gt_footnote_marks {
+  font-style: italic;
+  font-size: 65%;
+}
+</style>
+<div id="jxetkbsrvf" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+  <thead class="gt_header">
+    <tr>
+      <th colspan="7" class="gt_heading gt_title gt_font_normal" style><strong>2014-2018 Salary and Playoff Appearances</strong></th>
+    </tr>
+    <tr>
+      <th colspan="7" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style>QBS limited to playoff games where they threw a pass</th>
+    </tr>
+  </thead>
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: black;">Player</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: black;">Wildcard</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: black;">Division</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: black;">Conference</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: black;">Superbowl</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: black;">Total</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: black;">Salary</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr>
+      <td class="gt_row gt_left">Tom Brady</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">5</td>
+      <td class="gt_row gt_right">5</td>
+      <td class="gt_row gt_right">4</td>
+      <td class="gt_row gt_right" style="background-color: #35B0AB; color: #000000; border-left-width: 3px; border-left-style: solid; border-left-color: black;">15</td>
+      <td class="gt_row gt_right" style="background-color: #8FD1AB; color: #000000;">$100.1 M</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Aaron Rodgers</td>
+      <td class="gt_row gt_right">2</td>
+      <td class="gt_row gt_right">4</td>
+      <td class="gt_row gt_right">3</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right" style="background-color: #BAE5B1; color: #000000; border-left-width: 3px; border-left-style: solid; border-left-color: black;">9</td>
+      <td class="gt_row gt_right" style="background-color: #47B5AB; color: #000000;">$125.6 M</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Russell Wilson</td>
+      <td class="gt_row gt_right">4</td>
+      <td class="gt_row gt_right">4</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right" style="background-color: #ABDEAF; color: #000000; border-left-width: 3px; border-left-style: solid; border-left-color: black;">10</td>
+      <td class="gt_row gt_right" style="background-color: #A0D9AD; color: #000000;">$91.1 M</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Ben Roethlisberger</td>
+      <td class="gt_row gt_right">3</td>
+      <td class="gt_row gt_right">3</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right" style="background-color: #D5F0BD; color: #000000; border-left-width: 3px; border-left-style: solid; border-left-color: black;">7</td>
+      <td class="gt_row gt_right" style="background-color: #3EB2AB; color: #000000;">$127.7 M</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Alex Smith</td>
+      <td class="gt_row gt_right">2</td>
+      <td class="gt_row gt_right">2</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right" style="background-color: #F4FCD8; color: #000000; border-left-width: 3px; border-left-style: solid; border-left-color: black;">4</td>
+      <td class="gt_row gt_right" style="background-color: #9BD7AC; color: #000000;">$93.7 M</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Andrew Luck</td>
+      <td class="gt_row gt_right">2</td>
+      <td class="gt_row gt_right">2</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right" style="background-color: #ECF9CE; color: #000000; border-left-width: 3px; border-left-style: solid; border-left-color: black;">5</td>
+      <td class="gt_row gt_right" style="background-color: #BBE5B2; color: #000000;">$75.3 M</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Cam Newton</td>
+      <td class="gt_row gt_right">2</td>
+      <td class="gt_row gt_right">2</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right" style="background-color: #E0F5C5; color: #000000; border-left-width: 3px; border-left-style: solid; border-left-color: black;">6</td>
+      <td class="gt_row gt_right" style="background-color: #84CCAB; color: #000000;">$104.4 M</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Dak Prescott</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">2</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right" style="background-color: #F8FDE5; color: #000000; border-left-width: 3px; border-left-style: solid; border-left-color: black;">3</td>
+      <td class="gt_row gt_right" style="background-color: #FFFFFF; color: #000000;">$4.0 M</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Deshaun Watson</td>
+      <td class="gt_row gt_right">2</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right" style="background-color: #F8FDE5; color: #000000; border-left-width: 3px; border-left-style: solid; border-left-color: black;">3</td>
+      <td class="gt_row gt_right" style="background-color: #FDFEF7; color: #000000;">$9.4 M</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Drew Brees</td>
+      <td class="gt_row gt_right">2</td>
+      <td class="gt_row gt_right">2</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right" style="background-color: #ECF9CE; color: #000000; border-left-width: 3px; border-left-style: solid; border-left-color: black;">5</td>
+      <td class="gt_row gt_right" style="background-color: #49B5AB; color: #000000;">$125.2 M</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Kirk Cousins</td>
+      <td class="gt_row gt_right">2</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right" style="background-color: #F8FDE5; color: #000000; border-left-width: 3px; border-left-style: solid; border-left-color: black;">3</td>
+      <td class="gt_row gt_right" style="background-color: #93D3AB; color: #000000;">$98.4 M</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Marcus Mariota</td>
+      <td class="gt_row gt_right">2</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right" style="background-color: #F8FDE5; color: #000000; border-left-width: 3px; border-left-style: solid; border-left-color: black;">3</td>
+      <td class="gt_row gt_right" style="background-color: #E5F6C9; color: #000000;">$45.1 M</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Matt Ryan</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">2</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right" style="background-color: #ECF9CE; color: #000000; border-left-width: 3px; border-left-style: solid; border-left-color: black;">5</td>
+      <td class="gt_row gt_right" style="background-color: #60BDAB; color: #000000;">$118.0 M</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Matt Stafford</td>
+      <td class="gt_row gt_right">2</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right" style="background-color: #FCFEF2; color: #000000; border-left-width: 3px; border-left-style: solid; border-left-color: black;">2</td>
+      <td class="gt_row gt_right" style="background-color: #35B0AB; color: #000000;">$129.7 M</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Patrick Mahomes</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right">2</td>
+      <td class="gt_row gt_right">2</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right" style="background-color: #ECF9CE; color: #000000; border-left-width: 3px; border-left-style: solid; border-left-color: black;">5</td>
+      <td class="gt_row gt_right" style="background-color: #FCFEF5; color: #000000;">$11.2 M</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Peyton Manning</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right">2</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right" style="background-color: #F4FCD8; color: #000000; border-left-width: 3px; border-left-style: solid; border-left-color: black;">4</td>
+      <td class="gt_row gt_right" style="background-color: #F2FBD2; color: #000000;">$35.0 M</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Andy Dalton</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right" style="background-color: #FFFFFF; color: #000000; border-left-width: 3px; border-left-style: solid; border-left-color: black;">1</td>
+      <td class="gt_row gt_right" style="background-color: #B3E2B0; color: #000000;">$80.0 M</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Blake Bortles</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right" style="background-color: #F8FDE5; color: #000000; border-left-width: 3px; border-left-style: solid; border-left-color: black;">3</td>
+      <td class="gt_row gt_right" style="background-color: #F4FBD7; color: #000000;">$31.7 M</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Brian Hoyer</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right" style="background-color: #FFFFFF; color: #000000; border-left-width: 3px; border-left-style: solid; border-left-color: black;">1</td>
+      <td class="gt_row gt_right" style="background-color: #FCFEF2; color: #000000;">$12.9 M</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Brock Osweiler</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right" style="background-color: #FCFEF2; color: #000000; border-left-width: 3px; border-left-style: solid; border-left-color: black;">2</td>
+      <td class="gt_row gt_right" style="background-color: #FAFEEE; color: #000000;">$15.6 M</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Carson Palmer</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right" style="background-color: #FCFEF2; color: #000000; border-left-width: 3px; border-left-style: solid; border-left-color: black;">2</td>
+      <td class="gt_row gt_right" style="background-color: #CEEEB8; color: #000000;">$62.9 M</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Carson Wentz</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right" style="background-color: #FFFFFF; color: #000000; border-left-width: 3px; border-left-style: solid; border-left-color: black;">1</td>
+      <td class="gt_row gt_right" style="background-color: #F6FCDF; color: #000000;">$26.6 M</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Case Keenum</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right" style="background-color: #FCFEF2; color: #000000; border-left-width: 3px; border-left-style: solid; border-left-color: black;">2</td>
+      <td class="gt_row gt_right" style="background-color: #F7FCE1; color: #000000;">$24.7 M</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Eli Manning</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right" style="background-color: #FFFFFF; color: #000000; border-left-width: 3px; border-left-style: solid; border-left-color: black;">1</td>
+      <td class="gt_row gt_right" style="background-color: #4CB6AB; color: #000000;">$124.2 M</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Jared Goff</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right" style="background-color: #F4FCD8; color: #000000; border-left-width: 3px; border-left-style: solid; border-left-color: black;">4</td>
+      <td class="gt_row gt_right" style="background-color: #F5FCDA; color: #000000;">$29.7 M</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Jimmy Garoppolo</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right" style="background-color: #F8FDE5; color: #000000; border-left-width: 3px; border-left-style: solid; border-left-color: black;">3</td>
+      <td class="gt_row gt_right" style="background-color: #D2EFBB; color: #000000;">$59.8 M</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Joe Flacco</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right" style="background-color: #FCFEF2; color: #000000; border-left-width: 3px; border-left-style: solid; border-left-color: black;">2</td>
+      <td class="gt_row gt_right" style="background-color: #80CAAB; color: #000000;">$106.1 M</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Josh Allen</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right" style="background-color: #FFFFFF; color: #000000; border-left-width: 3px; border-left-style: solid; border-left-color: black;">1</td>
+      <td class="gt_row gt_right" style="background-color: #FDFEF8; color: #000000;">$8.7 M</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Lamar Jackson</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right" style="background-color: #FCFEF2; color: #000000; border-left-width: 3px; border-left-style: solid; border-left-color: black;">2</td>
+      <td class="gt_row gt_right" style="background-color: #FFFFFF; color: #000000;">$3.9 M</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Mitchell Trubisky</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right" style="background-color: #FFFFFF; color: #000000; border-left-width: 3px; border-left-style: solid; border-left-color: black;">1</td>
+      <td class="gt_row gt_right" style="background-color: #F9FDE8; color: #000000;">$19.8 M</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Nick Foles</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right" style="background-color: #FCFEF2; color: #000000; border-left-width: 3px; border-left-style: solid; border-left-color: black;">2</td>
+      <td class="gt_row gt_right" style="background-color: #F3FBD4; color: #000000;">$33.8 M</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Philip Rivers</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right" style="background-color: #FCFEF2; color: #000000; border-left-width: 3px; border-left-style: solid; border-left-color: black;">2</td>
+      <td class="gt_row gt_right" style="background-color: #62BEAB; color: #000000;">$117.3 M</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Ryan Tannehill</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right" style="background-color: #F8FDE5; color: #000000; border-left-width: 3px; border-left-style: solid; border-left-color: black;">3</td>
+      <td class="gt_row gt_right" style="background-color: #DDF4C3; color: #000000;">$51.2 M</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Teddy Bridgewater</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right" style="background-color: #FFFFFF; color: #000000; border-left-width: 3px; border-left-style: solid; border-left-color: black;">1</td>
+      <td class="gt_row gt_right" style="background-color: #FCFEF3; color: #000000;">$12.4 M</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Tony Romo</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right" style="background-color: #FCFEF2; color: #000000; border-left-width: 3px; border-left-style: solid; border-left-color: black;">2</td>
+      <td class="gt_row gt_right" style="background-color: #E2F5C6; color: #000000;">$47.6 M</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Tyrod Taylor</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right" style="background-color: #FFFFFF; color: #000000; border-left-width: 3px; border-left-style: solid; border-left-color: black;">1</td>
+      <td class="gt_row gt_right" style="background-color: #EFFAD0; color: #000000;">$37.7 M</td>
+    </tr>
+  </tbody>
+  <tfoot class="gt_sourcenotes">
+    <tr>
+      <td class="gt_sourcenote" colspan="7">Table: @MrOchiwar</td>
+    </tr>
+  </tfoot>
+  
+</table></div>
+</body>
+</html>

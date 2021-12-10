@@ -1,0 +1,192 @@
+---
+title: "TidyTuesday_11.13.20"
+author: "Ochiwar"
+date: "11/13/2020"
+output:
+  pdf_document: 
+    latex_engine: xelatex
+header-includes:
+  - \usepackage{pdflscape}
+  - \newcommand{\blandscape}{\begin{landscape}}
+  - \newcommand{\elandscape}{\end{landscape}}
+  - \usepackage{fancyhdr}
+papersize: a4
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, 
+                      message = FALSE,
+                      include = FALSE)
+```
+
+
+```{r load_libraries}
+
+library(tidytuesdayR)
+library(ggplot2)
+library(tidyverse)
+library(waffle)
+library(sf)
+library(rnaturalearth)
+library(patchwork)
+library(scales)
+library(ggthemes)
+library(viridis)
+library(ggtext)
+library(extrafont)
+library(hrbrthemes)
+library(lubridate)
+library(forcats)
+library(showtext)
+library(silgelib)
+
+extrafont::loadfonts(quiet = TRUE)
+
+theme_set(theme_plex())
+```
+
+# Add Google Font
+
+```{r}
+
+font_add_google("IBM Plex Sans", "IBMPlexSans")
+
+showtext_auto()
+
+
+```
+
+
+# Activity Description
+
+
+## Load Data 
+
+```{r include=TRUE}
+
+tuesdata <- tidytuesdayR::tt_load(2021, week = 2)
+
+transit_cost <- tuesdata$transit_cost
+
+glimpse(transit_cost)
+
+```
+
+
+```{r}
+
+library(countrycode)
+
+transit_cost <- transit_cost %>% 
+  filter(!is.na(e)) %>% 
+  mutate_at(vars(start_year, end_year, real_cost), as.numeric) %>% 
+  mutate(country_code = if_else(country == "UK", "GB", country), 
+         country = countrycode(country_code, "iso2c", "country.name"), 
+         tunnel_per = tunnel / length, 
+         rr = ifelse(rr, "Railroad", "Not Railroad"))
+
+```
+
+
+```{r}
+
+transit_cost %>% 
+  count(country, sort = T)
+
+transit_cost %>% 
+  count(country, city, sort = T)
+
+```
+
+```{r}
+
+transit_cost %>% 
+  filter(country == "United States") %>%  
+  mutate(line = fct_reorder(line, year)) %>% 
+  ggplot(aes(xmin = start_year, xmax = end_year, y = line, color = city, size = real_cost)) +
+  geom_errorbarh(height = 0.1) + 
+  labs(y = "")
+
+```
+
+
+```{r}
+library(glue)
+library(scales)
+
+transit_cost %>% 
+  ggplot(aes(cost_km_millions)) +
+  geom_histogram() + 
+  scale_x_continuous(labels = dollar) +
+  labs(x = "cost /Km (millions of USD)")
+
+
+
+transit_cost %>% 
+  mutate(country = fct_lump(country, 12, other_level = "Other Countries"),
+         country = fct_reorder(country, cost_km_millions, na.rm = T)) %>% 
+  ggplot(aes(cost_km_millions, country)) +
+  geom_boxplot() + 
+  scale_x_continuous(labels = dollar) +
+  labs(x = "Cost /Km (millions of USD)")
+
+
+
+transit_cost %>% 
+  filter(!is.na(cost_km_millions)) %>% 
+  filter(tunnel_per == 1) %>% 
+  mutate(country = fct_lump(country, 12, other_level = "Other Countries")) %>% 
+  add_count(country) %>% 
+  mutate(
+         country = glue("{country}({n})"),
+         country = fct_reorder(country, cost_km_millions)) %>% 
+  ggplot(aes(cost_km_millions, country)) +
+  geom_boxplot() + 
+  scale_x_continuous(labels = dollar) +
+  labs(x = "Cost /Km (millions of USD)", y = "")
+
+
+
+
+transit_cost %>% 
+  filter(!is.na(cost_km_millions)) %>% 
+  filter(tunnel_per == 1) %>% 
+  mutate(country = fct_lump(country, 12, other_level = "Other Countries")) %>% 
+  add_count(country) %>% 
+  mutate(
+         country = glue("{country}({n})"),
+         country = fct_reorder(country, cost_km_millions)) %>% 
+  ggplot(aes(cost_km_millions, country, fill = rr)) +
+  geom_boxplot() + 
+  scale_x_continuous(labels = dollar) +
+  labs(x = "Cost /Km (millions of USD)",
+       y = "")
+  
+
+```
+
+
+
+
+```{r}
+transit_cost %>% 
+  filter(!is.na(cost_km_millions), 
+                tunnel_per == 1, 
+                country == "China") %>% 
+  mutate(city = fct_lump(city, 10)) %>% 
+  add_count(city) %>% 
+  mutate(city = glue("{city}({ n})"),
+         city = fct_reorder(city, cost_km_millions)) %>% 
+
+ggplot(aes(cost_km_millions, city)) +
+  geom_boxplot() + 
+  scale_x_continuous(labels = dollar) +
+  labs(x = "Cost /Km (millions of USD)",
+       y = "") + 
+  expand_limits(x =0)
+
+
+
+```
+

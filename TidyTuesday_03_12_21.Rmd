@@ -1,0 +1,61 @@
+---
+title: "TidyTuesday_ Week 11"
+author: "Ochiwar"
+date: "4/7/2021"
+output:
+  pdf_document: 
+    latex_engine: xelatex
+header-includes:
+  - \usepackage{pdflscape}
+  - \newcommand{\blandscape}{\begin{landscape}}
+  - \newcommand{\elandscape}{\end{landscape}}
+  - \usepackage{fancyhdr}
+papersize: a4
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, 
+                      message = FALSE,
+                      include = TRUE, 
+                      warning = FALSE)
+```
+
+```{r}
+{r load_libraries, include=FALSE}
+
+library(tidytuesdayR)
+library(ggplot2)
+library(tidyverse)
+library(sf)
+library(rnaturalearth)
+library(patchwork)
+library(scales)
+library(ggthemes)
+library(viridis)
+library(ggtext)
+library(extrafont)
+library(hrbrthemes)
+library(lubridate)
+library(forcats)
+library(showtext)
+library(glue)
+library(scales)
+library(tidytext)
+library(countrycode)
+
+
+```
+
+```{r}
+
+tuesdata <- tidytuesdayR::tt_load(2021, week = 11)
+bechdel <- tuesdata$raw_bechdel
+movies <- tuesdata$movies
+
+```
+
+```{r}
+
+```
