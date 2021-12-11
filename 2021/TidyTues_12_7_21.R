@@ -64,7 +64,7 @@ top_9_species |>
     gt() |> 
     tab_options(table.font.names = "calibri") |> 
     tab_header(
-        title = md("**Spider Species With The Most Geographic Reach**"),
+        title = md("**Spider Species With The Most Geographic Spread**"),
         subtitle = md("Species found in at least *14* countries")
     ) |> 
     tab_style(
